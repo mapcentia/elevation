@@ -23,9 +23,9 @@ module.exports = {
      *
      */
     init: function () {
-        window.elevation = () => {
+        window.elevation = (sql) => {
             fetch(
-                'https://geofyn.mapcentia.com/api/v2/sql/destinationfyn?q=select%20(ST_DumpPoints(ST_Transform(ST_Simplify(the_geom,100),4326))).geom%20from%20herregaardsruten.herregaardsruten_bogense_odense&srs=4326'
+                `https://geofyn.mapcentia.com/api/v2/sql/destinationfyn?q=${sql}&srs=4326`
             ).then((res) => res.json()).then((data) => {
                 const coords = data.features.map((feature) => {
                     return feature.geometry.coordinates.reverse()
