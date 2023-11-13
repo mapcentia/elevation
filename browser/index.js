@@ -6,6 +6,8 @@
 
 'use strict';
 
+var urlparser = require('./../../../browser/modules/urlparser');
+var db = urlparser.db;
 var Chart = require('chart.js/auto');
 
 module.exports = {
@@ -25,7 +27,7 @@ module.exports = {
     init: function () {
         window.elevation = (sql) => {
             fetch(
-                `https://geofyn.mapcentia.com/api/v2/sql/destinationfyn?q=${sql}&srs=4326`
+                `/api/sql/${db}?q=${sql}&srs=4326`
             ).then((res) => res.json()).then((data) => {
                 const coords = data.features.map((feature) => {
                     return feature.geometry.coordinates.reverse()
